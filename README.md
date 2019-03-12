@@ -1,2 +1,2 @@
 # chatter.io
-Chatting application using Socket.IO for Node.js
+Chat application using Socket.IO for Node.js
