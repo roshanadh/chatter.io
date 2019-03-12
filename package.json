@@ -1,0 +1,29 @@
+{
+  "name": "chatter.io",
+  "version": "1.0.0",
+  "description": "Chat application using Socket.IO for Node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roshanadh/chatter.io.git"
+  },
+  "keywords": [
+    "chat",
+    "socket",
+    "nodejs",
+    "socket.io"
+  ],
+  "author": "Roshan Adhikari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roshanadh/chatter.io/issues"
+  },
+  "homepage": "https://github.com/roshanadh/chatter.io#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}

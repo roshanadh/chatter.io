@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chatter.IO</title>
+    </head>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        var username = '';
+        /*
+            ~ Event handlers ~
+        */
+        socket.on('userSet', (data) => {
+            alert('SUCCESS - ' + data.username + ' has been logged in!');
+        });
+
+        socket.on('usernameExists', (data) => {
+            alert('ERROR - ' + username + ' already exists!');
+        });
+
+        function setUsername(){
+            username = document.getElementById('username').value;
+            socket.emit('setUsername', username);
+        }
+
+    </script>
+    <body>
+        <input type="text" id="username" placeholder="Enter your username">
+        <button type="button" id="send" name="btnSend" onclick="setUsername()">Log In</button>
+    </body>
+</html>
