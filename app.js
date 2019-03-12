@@ -3,7 +3,7 @@ const http = require('http').Server(app);
 
 // Instantiate socket.io instance by passing http instance to the constructor
 const io = require('socket.io')(http);
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Define default route handler
 app.get('/', (req, res) => {
