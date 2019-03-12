@@ -12,10 +12,22 @@
         */
         socket.on('userSet', (data) => {
             alert('SUCCESS - ' + data.username + ' has been logged in!');
+            var input = document.getElementById('username');
+            var button = document.getElementById('btnSend');
+            input.id = 'message';
+            input.placeholder = 'Type your message';
+            button.innerText = 'Send Message';
+            button.onclick = sendMessage;
+
         });
 
         socket.on('usernameExists', (data) => {
             alert('ERROR - ' + username + ' already exists!');
+        });
+
+        socket.on('newMsg', (data) => {
+            var msgBox = document.getElementById('message-container');
+            msgBox.innerHTML += '<div><b>' + data.user + '</b>: ' + data.message + '</div>';
         });
 
         function setUsername(){
@@ -23,9 +35,17 @@
             socket.emit('setUsername', username);
         }
 
+        function sendMessage(){
+            var message = document.getElementById('message').value;
+            var user = username;
+
+            socket.emit('msg', {user: user, message: message});
+        }
+
     </script>
     <body>
         <input type="text" id="username" placeholder="Enter your username">
-        <button type="button" id="send" name="btnSend" onclick="setUsername()">Log In</button>
+        <button type="button" id="btnSend" name="btnSend" onclick="setUsername()" value="Log In">Log In</button>
+        <div id="message-container"></div>
     </body>
 </html>

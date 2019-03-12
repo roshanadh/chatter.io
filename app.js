@@ -25,6 +25,12 @@ io.on('connection', (socket) => {
         }
     });
 
+    socket.on('msg', (data) => {
+        //Send the incoming message to all connected clients
+        io.sockets.emit('newMsg', data);
+        console.log('MESSAGE - FROM :' + data.user + ', MSG : ' + data.message);
+    });
+
     socket.on('disconnect', () => {
         console.log('a user has disconnected');
     });
