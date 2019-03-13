@@ -16,4 +16,5 @@ git clone https://github.com/roshanadh/chatter.io/
 * Go to the URL localhost:3000
 
 **Done!**
+
 You can now start chatting.
