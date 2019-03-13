@@ -11,6 +11,7 @@ app.get('/', (req, res) => {
 });
 
 // List of users logged in to the chat server
+let usersMap = {};
 let users = [];
 
 // Event handler - invoked when a client connects
@@ -24,6 +25,7 @@ io.on('connection', (socket) => {
 
         // Add the username to the list if it isn't there already
         if(users.indexOf(username) <= -1){
+            usersMap[socket.id] = username;
             users.push(username);
 
             // Fire custom event notifying the successful login
@@ -50,6 +52,8 @@ io.on('connection', (socket) => {
     // Event handler - invoked when a user leaves the connection
     socket.on('disconnect', () => {
         console.log('a user has disconnected');
+        socket.broadcast.emit('userLeft', usersMap[socket.id]);
+        users.splice(usersMap[socket.id]);
     });
 });
 

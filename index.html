@@ -39,6 +39,10 @@
             msgBox.innerHTML += '<div><b>' + data.user + '</b>: ' + data.message + '</div>';
         });
 
+        socket.on('userLeft', (username) => {
+            var msgBox = document.getElementById('message-container');
+            msgBox.innerHTML += "<div style='text-align: center; color: red;'><b>" + username + "</b> has left the chat!</div>";
+        })
         function setUsername(){
             username = document.getElementById('username').value;
             socket.emit('setUsername', username);
