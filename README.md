@@ -18,7 +18,7 @@ git clone https://github.com/roshanadh/chatter.io/
 ```console
 node app.js
 ```
-* Go to the URL localhost:3000
+* Go to localhost:3000
 * Done!
 
 ### You can now start chatting.
