@@ -9,13 +9,13 @@ Heroku app URL: https://roshan-chatter-io.herokuapp.com/
 ## Local
 To run the chat server locally, 
 * Clone the repo
-```sh
+```console
 git clone https://github.com/roshanadh/chatter.io/
 ```
 
 * Change the working directory to the cloned repo
 * Run the server
-```sh
+```console
 node app.js
 ```
 * Go to the URL localhost:3000
