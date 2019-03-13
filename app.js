@@ -10,8 +10,9 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-// List of users logged in to the chat server
+// Object that maps the client's socket ID to client's username
 let usersMap = {};
+// List of users logged in to the chat server
 let users = [];
 
 // Event handler - invoked when a client connects
