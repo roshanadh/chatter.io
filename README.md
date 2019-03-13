@@ -13,6 +13,11 @@ To run the chat server locally,
 git clone https://github.com/roshanadh/chatter.io/
 ```
 
+* Change the working directory to the cloned repo
+* Run the server
+```sh
+node app.js
+```
 * Go to the URL localhost:3000
 * Done!
 
