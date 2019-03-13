@@ -17,4 +17,4 @@ git clone https://github.com/roshanadh/chatter.io/
 
 **Done!**
 
-You can now start chatting.
+### You can now start chatting.
