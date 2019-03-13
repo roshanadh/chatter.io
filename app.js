@@ -28,13 +28,14 @@ io.on('connection', (socket) => {
 
             // Fire custom event notifying the successful login
             socket.emit('userSet', {username: username});
+            socket.broadcast.emit('newUser', {username: username});
             console.log('USER - ' + username + ' logged in!');
         }
         else{
 
             // Fire custom event notifying the error in login
             socket.emit('usernameExists', username);
-            console.log('USER - ' + username + ' already exists!');
+            console.log('USER - ' + username + ' already taken!');
         }
     });
 
