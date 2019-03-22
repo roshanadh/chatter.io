@@ -111,7 +111,6 @@
             else 
                 msgFromOther = true;
             
-            console.log(msgFromSelf, msgFromOther);
             if(msgFromSelf === true){
                 msgBox.innerHTML += "<br><div class='message' style='position: absolute; right:20px; background-color:rgba(200, 247, 197, 0.8);'>" + data.message + "</div><br>";
             }
@@ -127,19 +126,34 @@
         });
 
         function setUsername(){
-            var msgBox = document.getElementById('message-container');
+            var logBox = document.getElementById('log-container');
             username = document.getElementById('username').value;
+
             if(username.trim() != '')
                 socket.emit('setUsername', username);
             else
-            msgBox.innerHTML += "<div style='text-align: center; color: red;'><b>Username cannot be empty!</b></div>";
+                logBox.innerHTML = "<div style='text-align: center; color: red;'><b>Username cannot be empty!</div>";
+            
+            // Clear logbox after 5 seconds
+            setTimeout( () => {
+                logBox.innerHTML = '';
+            }, 5000);
         }
 
         function sendMessage(){
+            var logBox = document.getElementById('log-container');
             var message = document.getElementById('message').value;
             var user = username;
 
-            socket.emit('msg', {user: user, message: message});
+            if(message.trim() != '')
+                socket.emit('msg', {user: user, message: message});
+            else
+                logBox.innerHTML = "<div style='text-align: center; color: red;'><b>Message cannot be empty!</div>";
+
+            // Clear logbox after 5 seconds
+            setTimeout( () => {
+                logBox.innerHTML = '';
+            }, 5000);
         }
 
     </script>
