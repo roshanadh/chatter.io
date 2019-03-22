@@ -4,20 +4,26 @@
         <title>Chatter.IO</title>
     </head>
     <style>
-        
         #log-container{
             margin: 10px;
         }
         #message-container{
+            margin: 10px, 0;
+            width: 100%;
+            padding-left: 10px;
+            padding-bottom: 100px;
+        }
+        #newMsg{
             position: relative;
-            margin: 10px;
         }
         .msgSender{
+            position: relative;
             display: inline;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color: rgb(26, 41, 122);
         }
         .message{
+            position: relative;
             border-radius: 5px;
             padding-top: 5px;
             padding-bottom: 5px;
@@ -83,7 +89,7 @@
         });
 
         socket.on('newUser', (data) => {
-            var msgBox = document.getElementById('message-container');
+            var msgBox = document.getElementById('newMsg');
             msgBox.innerHTML += "<div style='text-align: center; color: blue;'><b>" + data.username + "</b> has entered the chat!</div>"; 
         });
 
@@ -93,12 +99,26 @@
         });
 
         socket.on('newMsg', (data) => {
-            var msgBox = document.getElementById('message-container');
-            msgBox.innerHTML += "<span class='msgSender'>" + data.user + "</span><br><div class='message'>" + data.message + "</div><br>";
+            var msgBox = document.getElementById('newMsg');
+            var msgFromSelf = false, msgFromOther = false;
+
+            if(data.user === username)
+                msgFromSelf = true;
+            else 
+                msgFromOther = true;
+            
+            console.log(msgFromSelf, msgFromOther);
+            if(msgFromSelf === true){
+                msgBox.innerHTML += "<br><div class='message' style='position: absolute; right:20px; background-color:rgba(200, 247, 197, 0.8);'>" + data.message + "</div><br>";
+            }
+            else
+            msgBox.innerHTML += "<span class='msgSender'>" + data.user + "</span><br><div class='message'>" + data.message + "</div>";
+                
+            
         });
 
         socket.on('userLeft', (username) => {
-            var msgBox = document.getElementById('message-container');
+            var msgBox = document.getElementById('newMsg');
             msgBox.innerHTML += "<div style='text-align: center; color: red;'><b>" + username + "</b> has left the chat!</div>";
         });
 
@@ -123,6 +143,16 @@
         <input type="text" id="username" placeholder="Enter your username">
         <button type="button" id="btnSend" name="btnSend" onclick="setUsername()" value="Log In">Log In</button>
         <div id="log-container"></div>
-        <div id="message-container"></div>
+        <div id="message-container"><div id="newMsg"></div></div>
+        <script>      var docWidth = document.documentElement.offsetWidth;
+
+                [].forEach.call(
+                  document.querySelectorAll('*'),
+                  function(el) {
+                    if (el.offsetWidth > docWidth) {
+                      console.log(el);
+                    }
+                  }
+                );</script>
     </body>
 </html>
