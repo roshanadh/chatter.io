@@ -1,9 +1,13 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 
 // Instantiate socket.io instance by passing http instance to the constructor
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 3000;
+
+// Serve static files from the root directory
+app.use(express.static(__dirname + '/'));
 
 // Define default route handler
 app.get('/', (req, res) => {
