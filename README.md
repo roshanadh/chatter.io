@@ -21,4 +21,4 @@ node app.js
 * Go to localhost:3000
 * Done!
 
-### You can now start chatting.
+### Keep on chatting!
