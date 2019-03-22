@@ -3,6 +3,27 @@
     <head>
         <title>Chatter.IO</title>
     </head>
+    <style>
+        
+        #message-container{
+            /* position: absolute;
+            bottom: 30px; */
+        }
+
+        .message{
+            display: inline-block;
+            border-radius: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 15px;
+            padding-right: 15px;
+            max-width: 200px;
+            margin: 5px;
+            background-color: cyan;
+            opacity: 0.8; 
+        }
+
+    </style>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         /* Joining the default namespace */
@@ -36,16 +57,21 @@
 
         socket.on('newMsg', (data) => {
             var msgBox = document.getElementById('message-container');
-            msgBox.innerHTML += '<div><b>' + data.user + '</b>: ' + data.message + '</div>';
+            msgBox.innerHTML += "<div class='message'><b>"+ data.user + "</b>: " + data.message + "</div><br>";
         });
 
         socket.on('userLeft', (username) => {
             var msgBox = document.getElementById('message-container');
             msgBox.innerHTML += "<div style='text-align: center; color: red;'><b>" + username + "</b> has left the chat!</div>";
-        })
+        });
+
         function setUsername(){
+            var msgBox = document.getElementById('message-container');
             username = document.getElementById('username').value;
-            socket.emit('setUsername', username);
+            if(username.trim() != '')
+                socket.emit('setUsername', username);
+            else
+            msgBox.innerHTML += "<div style='text-align: center; color: red;'><b>Username cannot be empty!</b></div>";
         }
 
         function sendMessage(){
